@@ -179,7 +179,7 @@ function userMenu() {
 }
 
 function showListUser() {
-    let data:string = userManagement.show();
+    let data: string = userManagement.show();
     fs.writeFileSync('./data.txt', data);
     userManagement.result = "===== Danh sách Người dùng =====\n";
 }
@@ -247,9 +247,15 @@ function showAndEditAlbum() {
                                 console.log(`\x1b[33m===== Album ${currentAlbum.name} =====\x1b[0m`);
                                 let index: number = null;
                                 while (index != 0) {
-                                    for (let i = 0; i < currentAlbum.album.length; i++) {
-                                        console.log("STT:" + (i + 1) + " - " + "Bài hát:" + currentAlbum.album[i].name + " - " + "Ca sĩ:" + currentAlbum.album[i].singer);
+                                    console.log("\x1b[33m===== Danh sách Bài hát =====\x1b[0m");
+                                    if (currentAlbum.album.length == 0) {
+                                        console.log("\x1b[31mKhông có Bài hát nào!!!\x1b[0m");
+                                    } else {
+                                        for (let i = 0; i < currentAlbum.album.length; i++) {
+                                            console.log("STT:" + (i + 1) + " - " + "Bài hát:" + currentAlbum.album[i].name + " - " + "Ca sĩ:" + currentAlbum.album[i].singer);
+                                        }
                                     }
+                                    console.log("----------------------")
                                     console.log("\x1b[31mNhập STT Bài hát để Xóa\x1b[0m");
                                     console.log("\x1b[31mBấm 0 hoặc Enter Thoát\x1b[0m");
                                     index = +input.question("Nhap lua chon: ");
@@ -259,13 +265,18 @@ function showAndEditAlbum() {
                                         1. Có
                                         2. Không
                                         `
-                                        console.log(menu);
-                                        let choice: string = input.question("Nhap lua chon: ");
-                                        if (choice == "1") {
-                                            currentAlbum.album.splice(index - 1, 1);
-                                        } else if (choice == "2") {
-                                        } else {
-                                            console.log("\x1b[31mNhập sai rồi!!! Nhập lại đê!!!\x1b[0m");
+                                        let choice: string = null;
+                                        while (choice != "2") {
+                                            console.log(menu);
+                                            choice = input.question("Nhap lua chon: ");
+                                            if (choice == "1") {
+                                                currentAlbum.album.splice(index - 1, 1);
+                                                break;
+                                            } else if (choice == "2") {
+                                                break;
+                                            } else {
+                                                console.log("\x1b[31mNhập sai rồi!!! Nhập lại đê!!!\x1b[0m");
+                                            }
                                         }
                                     } else if (index == 0) {
                                         break;
@@ -405,7 +416,7 @@ function addSong() {
 }
 
 function showListSong() {
-    let data:string = songManagement.show();
+    let data: string = songManagement.show();
     fs.writeFileSync('./data.txt', data);
     songManagement.result = "===== Danh sách Bài hát =====\n";
 }

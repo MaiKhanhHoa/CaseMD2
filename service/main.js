@@ -211,23 +211,34 @@ function showAndEditAlbum() {
                                 console.log("\u001B[33m===== Album ".concat(currentAlbum.name, " =====\u001B[0m"));
                                 var index_1 = null;
                                 while (index_1 != 0) {
-                                    for (var i = 0; i < currentAlbum.album.length; i++) {
-                                        console.log("STT:" + (i + 1) + " - " + "Bài hát:" + currentAlbum.album[i].name + " - " + "Ca sĩ:" + currentAlbum.album[i].singer);
+                                    console.log("\x1b[33m===== Danh sách Bài hát =====\x1b[0m");
+                                    if (currentAlbum.album.length == 0) {
+                                        console.log("\x1b[31mKhông có Bài hát nào!!!\x1b[0m");
+                                    }
+                                    else {
+                                        for (var i = 0; i < currentAlbum.album.length; i++) {
+                                            console.log("STT:" + (i + 1) + " - " + "Bài hát:" + currentAlbum.album[i].name + " - " + "Ca sĩ:" + currentAlbum.album[i].singer);
+                                        }
                                     }
                                     console.log("\x1b[31mNhập STT Bài hát để Xóa\x1b[0m");
                                     console.log("\x1b[31mBấm 0 hoặc Enter Thoát\x1b[0m");
                                     index_1 = +input.question("Nhap lua chon: ");
                                     if (index_1 > 0 && index_1 <= currentAlbum.album.length) {
                                         var menu_1 = "\n                                        \u001B[31m===== X\u00F3a B\u00E0i h\u00E1t STT:".concat(index_1, " ??? =====\u001B[0m\n                                        1. C\u00F3\n                                        2. Kh\u00F4ng\n                                        ");
-                                        console.log(menu_1);
-                                        var choice_1 = input.question("Nhap lua chon: ");
-                                        if (choice_1 == "1") {
-                                            currentAlbum.album.splice(index_1 - 1, 1);
-                                        }
-                                        else if (choice_1 == "2") {
-                                        }
-                                        else {
-                                            console.log("\x1b[31mNhập sai rồi!!! Nhập lại đê!!!\x1b[0m");
+                                        var choice_1 = null;
+                                        while (choice_1 != "2") {
+                                            console.log(menu_1);
+                                            choice_1 = input.question("Nhap lua chon: ");
+                                            if (choice_1 == "1") {
+                                                currentAlbum.album.splice(index_1 - 1, 1);
+                                                break;
+                                            }
+                                            else if (choice_1 == "2") {
+                                                break;
+                                            }
+                                            else {
+                                                console.log("\x1b[31mNhập sai rồi!!! Nhập lại đê!!!\x1b[0m");
+                                            }
                                         }
                                     }
                                     else if (index_1 == 0) {
