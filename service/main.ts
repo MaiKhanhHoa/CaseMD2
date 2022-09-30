@@ -737,20 +737,25 @@ function main() {
                     if (name == "") {
                         console.log("\x1b[31mKhông được để trống Tên Người dùng!!!\x1b[0m");
                     } else {
-                        for (let i = 0; i < userManagement.listUser.length; i++) {
-                            if (name == userManagement.listUser[i].name) {
-                                check = true
-                                console.log("\x1b[31mTên này đã tồn tại!!!\x1b[0m");
-                                name = "";
-                                break;
-                            } else {
-                                check = false;
+                        if (name == "admin") {
+                            console.log("\x1b[31mTên này đã tồn tại!!!\x1b[0m");
+                            name = "";
+                        } else {
+                            for (let i = 0; i < userManagement.listUser.length; i++) {
+                                if (name == userManagement.listUser[i].name) {
+                                    check = true
+                                    console.log("\x1b[31mTên này đã tồn tại!!!\x1b[0m");
+                                    name = "";
+                                    break;
+                                } else {
+                                    check = false;
+                                }
                             }
-                        }
-                        if (!check) {
-                            let password: string = input.question("Tao Mat khau: ");
-                            let user: User = new User(name, password, true);
-                            userManagement.listUser.push(user);
+                            if (!check) {
+                                let password: string = input.question("Tao Mat khau: ");
+                                let user: User = new User(name, password, true);
+                                userManagement.listUser.push(user);
+                            }
                         }
                     }
                 }

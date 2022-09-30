@@ -220,6 +220,7 @@ function showAndEditAlbum() {
                                             console.log("STT:" + (i + 1) + " - " + "Bài hát:" + currentAlbum.album[i].name + " - " + "Ca sĩ:" + currentAlbum.album[i].singer);
                                         }
                                     }
+                                    console.log("----------------------");
                                     console.log("\x1b[31mNhập STT Bài hát để Xóa\x1b[0m");
                                     console.log("\x1b[31mBấm 0 hoặc Enter Thoát\x1b[0m");
                                     index_1 = +input.question("Nhap lua chon: ");
@@ -701,21 +702,27 @@ function main() {
                         console.log("\x1b[31mKhông được để trống Tên Người dùng!!!\x1b[0m");
                     }
                     else {
-                        for (var i = 0; i < userManagement.listUser.length; i++) {
-                            if (name_5 == userManagement.listUser[i].name) {
-                                check = true;
-                                console.log("\x1b[31mTên này đã tồn tại!!!\x1b[0m");
-                                name_5 = "";
-                                break;
-                            }
-                            else {
-                                check = false;
-                            }
+                        if (name_5 == "admin") {
+                            console.log("\x1b[31mTên này đã tồn tại!!!\x1b[0m");
+                            name_5 = "";
                         }
-                        if (!check) {
-                            var password = input.question("Tao Mat khau: ");
-                            var user = new User_1.User(name_5, password, true);
-                            userManagement.listUser.push(user);
+                        else {
+                            for (var i = 0; i < userManagement.listUser.length; i++) {
+                                if (name_5 == userManagement.listUser[i].name) {
+                                    check = true;
+                                    console.log("\x1b[31mTên này đã tồn tại!!!\x1b[0m");
+                                    name_5 = "";
+                                    break;
+                                }
+                                else {
+                                    check = false;
+                                }
+                            }
+                            if (!check) {
+                                var password = input.question("Tao Mat khau: ");
+                                var user = new User_1.User(name_5, password, true);
+                                userManagement.listUser.push(user);
+                            }
                         }
                     }
                 } while (name_5 == "");
